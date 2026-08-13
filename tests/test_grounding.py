@@ -16,7 +16,7 @@ from astral.cards.grounding import (
 
 # Pinned hashes for the five runtime grounding assets (baseline v0.5.1 + BioTIER catalog).
 EXPECTED_HASHES = {
-    "biotier_routing.yaml": "c103f8336fe9996ce1918f60e6145c4f55235f18ca4588a8713d3869e3ac99ab",
+    "biotier_routing.yaml": "adef1973daa43470a7da5ef5dd7c77ad74a374f2d24089c8c1fe6b634b23fe66",
     "variable_roleplay_guide.yaml": "91e6594cb92af9e9333a5526e605999f74914828068223f9ec5da339a0a38ffb",  # noqa: E501
     "jailbreak_list.yaml": "0fc62ddec10ba75d79e105885d5dd2fe3ef770407e628b2bc4270a8c60bfc1b5",
     "biological_agent_list.yaml": "93511d537ff8861e6ed4191f30c3cadec7f1b441d2b2921fc98fd757eda861b5",  # noqa: E501
@@ -349,3 +349,32 @@ def test_every_selection_route_resolves_a_nonempty_pool() -> None:
             agentless += 1
     assert selection == 47
     assert agentless == 51
+
+def test_malicious_cards_require_the_vetted_overlay() -> None:
+    """Public tier gates malicious CA/BD compilation; RB and benign stay open."""
+    import pytest
+
+    from astral.cards.compile import GroundingAccessError, make_actor_card
+    from astral.cards.contracts import VariableAssignment
+
+    with pytest.raises(GroundingAccessError):
+        make_actor_card(
+            side="malicious",
+            route_id="ca.immune_escape.01",
+            variables=VariableAssignment(
+                scientific_capability=3, jailbreak=1, kill_chain=1, intended_scope=1
+            ),
+            seed=7,
+        )
+
+    # Benign RB content compiles without the overlay.
+    card = make_actor_card(
+        side="benign",
+        route_id="rb.biochemistry",
+        variables=VariableAssignment(
+            scientific_capability=3, jailbreak=0, kill_chain=0, intended_scope=0
+        ),
+        seed=7,
+    )
+    assert card.route.id == "rb.biochemistry"
+

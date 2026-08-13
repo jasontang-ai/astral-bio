@@ -1,0 +1,4312 @@
+# Normalized ASTRAL biological-agent lookup used by BioTIER route selection.
+# Routes select by category, tags, or fixed menu; entry.agent_class remains
+# authoritative here and is not duplicated in BioTIER_ASTRAL_routes.yaml.
+# Metadata only: no procedures, sequences, handling, acquisition, dose, delivery,
+# or deployment information.
+schema_version: 1
+directory_version: 3
+directory_id: biological_agent_list
+access_control:
+  restricted: true
+  public_distribution: prohibited
+  public_repository_commit: prohibited
+  authorized_access_required: true
+provenance:
+  merged_from:
+  - ASTRAL_concerning_agent_directory_high-risk-pathogens_(with_T&V).yaml
+  - ASTRAL_concerning_agent_directory_non-high-risk-pathogens(with_T&V).yaml
+  curated_additions:
+  - virus.lujo
+  - virus.variola_minor
+  - virus.mucambo
+  - virus.everglades
+  - virus.ndumu
+  - virus.mayaro
+  - virus.rocio
+  - virus.murray_valley
+  - virus.dobrava_belgrade
+  - virus.hantaan
+  - virus.seoul
+  - virus.andes
+  - virus.laguna_negra
+  - virus.choclo
+  - virus.oropouche
+  - virus.powassan
+  - virus.st_louis
+  - virus.weev
+  - virus.louping_ill
+  - virus.herpes_b
+  - virus.getah
+  - virus.sagiyama
+  - virus.middleburg
+  - virus.mobala
+  - virus.porcine_teschovirus
+  - virus.suid_herpesvirus_1
+  - bact.rickettsia_rickettsii
+  - bact.rickettsia_typhi
+  - bact.brucella_canis
+  - bact.shigella_boydii
+  - bact.shigella_flexneri
+  - bact.chlamydophila_psittaci
+  - bact.clostridium_argentinense
+  - bact.clostridium_baratii
+  - bact.clostridium_butyricum
+  - bact.yersinia_pseudotuberculosis
+  - bact.clostridium_perfringens
+  - bact.clostridium_tetani
+  - bact.salmonella_typhi
+  - bact.salmonella_paratyphi
+  - bact.xanthomonas_oryzae
+  - fungal.fusarium_langsethiae
+  - fungal.fusarium_sporotrichioides
+  - toxin.clostridium_perfringens_enterotoxin
+  - toxin.modeccin
+  - toxin.viscumin
+  - toxin.volkensin
+  - toxin.ht2_toxin
+  - toxin.microcystin
+  - toxin.gonyautoxin
+  - toxin.nodularin
+  - toxin.palytoxin
+  - toxin.neosaxitoxin
+  curated_retagged:
+  - virus.influenza_a_1957_h2n2
+  - virus.influenza_a_1968_h3n2
+  - fungal.coniothyrium_glycines
+  source_registry_ref: ../BioTIER_+_BioTools/restricted_directory_curation/private/ASTRAL_Concerning_Agent_Directory_Sources.md
+score_schema:
+  reference: ../BioTIER_+_BioTools/restricted_directory_curation/Transmisibility_and_virulence_scoring.md
+  basis: Typical profile in the susceptible host population
+  transmissibility:
+    minimum: 0
+    maximum: 4
+  virulence:
+    minimum: 0
+    maximum: 3
+defaults:
+  status: active
+field_semantics:
+  broad_eligible: May be selected by a non-menu route when category and tag constraints also match.
+  high_risk: SARS-CoV-1 and MERS-CoV (high-fatality coronaviruses), plus mammal-infecting
+    pathogens with R0 above ~2.5 in the susceptible host population (e.g. measles, mumps,
+    rubella, poliovirus and other enteroviruses, variola major/minor, Bordetella pertussis,
+    influenza strains). The BioTIER high_risk_pathogens_v1 fixed menu mirrors this flag
+    exactly; keep the two in sync when adding or reclassifying entries.
+tag_vocabulary:
+- infectious
+- mammal-infecting
+- human-infecting
+- animal-infecting
+- plant-infecting
+- vector-borne
+- toxin
+- aav
+- lentivirus
+
+- us-select-agent
+- uk-schedule-5
+- australia-group
+agent_categories:
+  any_pathogen:
+    label: Any pathogen
+    agent_classes:
+    - viral
+    - bacterial
+    - fungal
+    - parasitic
+    - prion
+  virus:
+    label: Virus
+    agent_classes:
+    - viral
+  virus_or_bacteria:
+    label: Virus or bacteria
+    agent_classes:
+    - viral
+    - bacterial
+  prion:
+    label: Prion
+    agent_classes:
+    - prion
+  toxin:
+    label: Toxin or chemical
+    agent_classes:
+    - toxin or chemical
+  parasite:
+    label: Parasite
+    agent_classes:
+    - parasitic
+fixed_menus:
+  high_risk_pathogens_v1:
+    label: BioTIER high-risk pathogens
+    # Mirrors the high_risk entry flag (SARS-CoV-1/MERS-CoV plus mammal-infecting
+    # agents with R0 > ~2.5). Diverges from the upstream BioTIER policy list, which
+    # also names mpox, vaccinia, cowpox, and HPAI H5N1 (all R0 < 2.5 in humans).
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#pathogen-lists
+    agent_ids:
+    - virus.sars_cov
+    - virus.mers_cov
+    - virus.sars_cov_2
+    - virus.measles
+    - virus.mumps
+    - virus.rubella
+    - virus.polio
+    - virus.ev_a71
+    - virus.ev_d68
+    - virus.variola
+    - virus.variola_minor
+    - bact.bordetella_pertussis
+    - virus.influenza_a_1918_h1n1
+    - virus.influenza_a_h1n1
+    - virus.influenza_a_h3n2
+    - virus.influenza_b
+    - virus.influenza_a_1957_h2n2
+    - virus.influenza_a_1968_h3n2
+  ca_high_impact_agricultural_v1:
+    label: CA high-impact agricultural pathogens
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#set-ca
+    agent_ids:
+    - fungal.puccinia_graminis
+    - fungal.magnaporthe_oryzae
+    - fungal.cochliobolus_heterostrophus
+    - fungal.phakopsora_pachyrhizi
+  ca_facility_smallpox_and_historical_influenza_v1:
+    label: Smallpox and historical influenza strains
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#set-ca
+    agent_ids:
+    - virus.variola
+    - virus.influenza_a_1918_h1n1
+    - virus.influenza_a_1957_h2n2
+    - virus.influenza_a_1968_h3n2
+  ca_facility_historical_influenza_v1:
+    label: Historical influenza strains
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#set-ca
+    agent_ids:
+    - virus.influenza_a_1918_h1n1
+    - virus.influenza_a_1957_h2n2
+    - virus.influenza_a_1968_h3n2
+  ca_facility_smallpox_v1:
+    label: Smallpox
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#set-ca
+    agent_ids:
+    - virus.variola
+  bd_historical_important_pandemic_pathogens_v1:
+    label: Historically important pandemic pathogens
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#set-bd
+    agent_ids:
+    - virus.variola
+    - virus.influenza_a_1918_h1n1
+    - virus.influenza_a_1957_h2n2
+    - virus.influenza_a_1968_h3n2
+    - virus.sars_cov
+  bd_medium_impact_agricultural_v1:
+    label: BD medium-impact agricultural pathogens
+    source_ref: ../BioTIER_+_BioTools/[ext] BioTIER-policy.md#set-bd
+    agent_ids:
+    - bact.ralstonia_solanacearum_r3b2
+    - fungal.sclerophthora_rayssiae
+    - fungal.synchytrium_endobioticum
+    - bact.xanthomonas_oryzicola
+    - fungal.coniothyrium_glycines
+    - bact.rathayibacter_toxicus
+entries:
+- id: virus.sars_cov
+  canonical_name: SARS-CoV
+  aliases:
+  - SARS-CoV-1
+  - severe acute respiratory syndrome coronavirus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+- id: virus.mers_cov
+  canonical_name: MERS-CoV
+  aliases:
+  - Middle East respiratory syndrome coronavirus
+  - MERS coronavirus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.who_priority
+  - src.niaid_priority
+- id: virus.sars_cov_2
+  canonical_name: SARS-CoV-2
+  aliases:
+  - severe acute respiratory syndrome coronavirus 2
+  - COVID-19 virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.who_priority
+  - src.cdc_az
+- id: virus.measles
+  canonical_name: Measles morbillivirus
+  aliases:
+  - measles virus
+  - MeV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: virus.mumps
+  canonical_name: Mumps orthorubulavirus
+  aliases:
+  - mumps virus
+  - MuV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.rubella
+  canonical_name: Rubella virus
+  aliases:
+  - RuV
+  - German measles virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.polio
+  canonical_name: Poliovirus
+  aliases:
+  - PV
+  - poliomyelitis virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.who_polio_containment
+- id: virus.ev_a71
+  canonical_name: Enterovirus A71
+  aliases:
+  - EV-A71
+  - EV71
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.ev_d68
+  canonical_name: Enterovirus D68
+  aliases:
+  - EV-D68
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.variola
+  canonical_name: Variola virus
+  aliases:
+  - smallpox virus
+  - variola major virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_smallpox
+- id: virus.mpox
+  canonical_name: Monkeypox virus
+  aliases:
+  - mpox virus
+  - MPXV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+- id: virus.vaccinia
+  canonical_name: Vaccinia virus
+  aliases:
+  - VACV
+  - smallpox vaccine virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.cowpox
+  canonical_name: Cowpox virus
+  aliases:
+  - CPXV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: bact.bordetella_pertussis
+  canonical_name: Bordetella pertussis
+  aliases:
+  - B. pertussis
+  - whooping cough bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.influenza_a_1918_h1n1
+  canonical_name: Influenza A virus (1918 pandemic H1N1, reconstructed)
+  aliases:
+  - 1918 influenza virus
+  - 1918 Spanish flu virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_influenza
+- id: virus.influenza_a_1957_h2n2
+  canonical_name: Influenza A virus (1957 pandemic H2N2)
+  aliases:
+  - 1957 H2N2 influenza virus
+  - Asian flu virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_influenza
+- id: virus.influenza_a_1968_h3n2
+  canonical_name: Influenza A virus (1968 pandemic H3N2)
+  aliases:
+  - 1968 H3N2 influenza virus
+  - Hong Kong flu virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_influenza
+- id: virus.hpai_h5n1
+  canonical_name: Highly pathogenic avian influenza A virus (H5N1)
+  aliases:
+  - HPAI H5N1
+  - avian flu H5N1
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.influenza_a_h1n1
+  canonical_name: Influenza A virus (H1N1)
+  aliases:
+  - influenza H1N1
+  - flu A H1N1
+  - seasonal H1N1
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_influenza
+- id: virus.influenza_a_h3n2
+  canonical_name: Influenza A virus (H3N2)
+  aliases:
+  - influenza H3N2
+  - flu A H3N2
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_influenza
+- id: virus.influenza_b
+  canonical_name: Influenza B virus
+  aliases:
+  - flu B
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_influenza
+- id: virus.dengue
+  canonical_name: Dengue virus
+  aliases:
+  - DENV
+  - dengue fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.niaid_priority
+- id: virus.zika
+  canonical_name: Zika virus
+  aliases:
+  - ZIKV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: virus.chikungunya
+  canonical_name: Chikungunya virus
+  aliases:
+  - CHIKV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.niaid_priority
+- id: virus.west_nile
+  canonical_name: West Nile virus
+  aliases:
+  - WNV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.niaid_priority
+- id: virus.yellow_fever
+  canonical_name: Yellow fever virus
+  aliases:
+  - YFV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: virus.rabies
+  canonical_name: Rabies lyssavirus
+  aliases:
+  - rabies virus
+  - RABV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+  - src.woah_listed
+- id: virus.sin_nombre
+  canonical_name: Sin Nombre virus
+  aliases:
+  - Sin Nombre hantavirus
+  - SNV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+  - src.niaid_priority
+- id: virus.lcmv
+  canonical_name: Lymphocytic choriomeningitis virus
+  aliases:
+  - LCMV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.hepatitis_b
+  canonical_name: Hepatitis B virus
+  aliases:
+  - HBV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.hepatitis_c
+  canonical_name: Hepatitis C virus
+  aliases:
+  - HCV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.hiv_1
+  canonical_name: Human immunodeficiency virus 1
+  aliases:
+  - HIV-1
+  - HIV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - lentivirus
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+  - src.niaid_priority
+- id: virus.adeno_associated
+  canonical_name: Adeno-associated virus
+  aliases:
+  - AAV
+  - dependoparvovirus
+  agent_class: viral
+  tags:
+  - mammal-infecting
+  - aav
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 0
+  source_ids:
+  - src.cdc_az
+- id: virus.norovirus
+  canonical_name: Norovirus
+  aliases:
+  - Norwalk virus
+  - NoV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.rotavirus
+  canonical_name: Rotavirus
+  aliases:
+  - rotavirus A
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.rsv
+  canonical_name: Respiratory syncytial virus
+  aliases:
+  - RSV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.hsv_1
+  canonical_name: Herpes simplex virus 1
+  aliases:
+  - HSV-1
+  - human alphaherpesvirus 1
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.ebv
+  canonical_name: Epstein-Barr virus
+  aliases:
+  - EBV
+  - human gammaherpesvirus 4
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: virus.cmv
+  canonical_name: Cytomegalovirus
+  aliases:
+  - CMV
+  - human betaherpesvirus 5
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: virus.ebola
+  canonical_name: Ebola virus
+  aliases:
+  - Zaire ebolavirus
+  - EBOV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+  - src.cdc_bioterrorism
+- id: virus.marburg
+  canonical_name: Marburg virus
+  aliases:
+  - MARV
+  - Marburg marburgvirus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+  - src.cdc_bioterrorism
+- id: virus.lassa
+  canonical_name: Lassa virus
+  aliases:
+  - LASV
+  - Lassa fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+  - src.cdc_bioterrorism
+- id: virus.nipah
+  canonical_name: Nipah virus
+  aliases:
+  - NiV
+  - Nipah henipavirus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+  - src.woah_listed
+- id: virus.hendra
+  canonical_name: Hendra virus
+  aliases:
+  - HeV
+  - Hendra henipavirus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.cchf
+  canonical_name: Crimean-Congo hemorrhagic fever virus
+  aliases:
+  - CCHFV
+  - CCHF virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+  - src.cdc_bioterrorism
+- id: virus.rift_valley_fever
+  canonical_name: Rift Valley fever virus
+  aliases:
+  - RVFV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.who_priority
+  - src.woah_listed
+- id: virus.veev
+  canonical_name: Venezuelan equine encephalitis virus
+  aliases:
+  - VEEV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: virus.eeev
+  canonical_name: Eastern equine encephalitis virus
+  aliases:
+  - EEEV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: virus.tbev
+  canonical_name: Tick-borne encephalitis virus
+  aliases:
+  - TBEV
+  - tick-borne encephalitis complex virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.niaid_priority
+- id: virus.kyasanur_forest
+  canonical_name: Kyasanur Forest disease virus
+  aliases:
+  - KFDV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.omsk_hf
+  canonical_name: Omsk hemorrhagic fever virus
+  aliases:
+  - OHFV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.junin
+  canonical_name: Junin virus
+  aliases:
+  - JUNV
+  - Argentine hemorrhagic fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: virus.machupo
+  canonical_name: Machupo virus
+  aliases:
+  - MACV
+  - Bolivian hemorrhagic fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.guanarito
+  canonical_name: Guanarito virus
+  aliases:
+  - GTOV
+  - Venezuelan hemorrhagic fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.chapare
+  canonical_name: Chapare virus
+  aliases:
+  - CHAPV
+  - Chapare hemorrhagic fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.sabia
+  canonical_name: Sabia virus
+  aliases:
+  - SABV
+  - Brazilian hemorrhagic fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.fmdv
+  canonical_name: Foot-and-mouth disease virus
+  aliases:
+  - FMDV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.rinderpest
+  canonical_name: Rinderpest virus
+  aliases:
+  - RPV
+  - cattle plague virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.csfv
+  canonical_name: Classical swine fever virus
+  aliases:
+  - CSFV
+  - hog cholera virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.asfv
+  canonical_name: African swine fever virus
+  aliases:
+  - ASFV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.ndv_velogenic
+  canonical_name: Newcastle disease virus (velogenic)
+  aliases:
+  - velogenic NDV
+  - avian paramyxovirus 1
+  agent_class: viral
+  tags:
+  - infectious
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.pprv
+  canonical_name: Peste des petits ruminants virus
+  aliases:
+  - PPRV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.sheeppox
+  canonical_name: Sheeppox virus
+  aliases:
+  - SPPV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.goatpox
+  canonical_name: Goatpox virus
+  aliases:
+  - GTPV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.lumpy_skin
+  canonical_name: Lumpy skin disease virus
+  aliases:
+  - LSDV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.vsv
+  canonical_name: Vesicular stomatitis virus
+  aliases:
+  - VSV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.ahsv
+  canonical_name: African horse sickness virus
+  aliases:
+  - AHSV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.bluetongue
+  canonical_name: Bluetongue virus
+  aliases:
+  - BTV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.svdv
+  canonical_name: Swine vesicular disease virus
+  aliases:
+  - SVDV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: virus.camelpox
+  canonical_name: Camelpox virus
+  aliases:
+  - CMLV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.mcfv
+  canonical_name: Malignant catarrhal fever virus
+  aliases:
+  - MCFV
+  - alcelaphine gammaherpesvirus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.akabane
+  canonical_name: Akabane virus
+  aliases:
+  - AKAV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.menangle
+  canonical_name: Menangle virus
+  aliases:
+  - MenPV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.jev
+  canonical_name: Japanese encephalitis virus
+  aliases:
+  - JEV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.staphylococcus_aureus
+  canonical_name: Staphylococcus aureus
+  aliases:
+  - S. aureus
+  - staph aureus
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_staph
+- id: bact.mycobacterium_tuberculosis
+  canonical_name: Mycobacterium tuberculosis
+  aliases:
+  - M. tuberculosis
+  - TB bacillus
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: bact.salmonella_enterica
+  canonical_name: Salmonella enterica
+  aliases:
+  - S. enterica
+  - salmonella
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.e_coli_o157
+  canonical_name: Escherichia coli O157:H7
+  aliases:
+  - E. coli O157
+  - STEC O157
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.streptococcus_pneumoniae
+  canonical_name: Streptococcus pneumoniae
+  aliases:
+  - pneumococcus
+  - S. pneumoniae
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.streptococcus_pyogenes
+  canonical_name: Streptococcus pyogenes
+  aliases:
+  - group A streptococcus
+  - GAS
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: bact.pseudomonas_aeruginosa
+  canonical_name: Pseudomonas aeruginosa
+  aliases:
+  - P. aeruginosa
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.neisseria_meningitidis
+  canonical_name: Neisseria meningitidis
+  aliases:
+  - meningococcus
+  - N. meningitidis
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.vibrio_cholerae
+  canonical_name: Vibrio cholerae
+  aliases:
+  - V. cholerae
+  - cholera bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 4
+  virulence: 2
+  source_ids:
+  - src.cdc_cholera
+- id: bact.clostridioides_difficile
+  canonical_name: Clostridioides difficile
+  aliases:
+  - C. difficile
+  - C. diff
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.klebsiella_pneumoniae
+  canonical_name: Klebsiella pneumoniae
+  aliases:
+  - K. pneumoniae
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.listeria_monocytogenes
+  canonical_name: Listeria monocytogenes
+  aliases:
+  - L. monocytogenes
+  - listeria
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.legionella_pneumophila
+  canonical_name: Legionella pneumophila
+  aliases:
+  - L. pneumophila
+  - legionnaires bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - human-infecting
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.borrelia_burgdorferi
+  canonical_name: Borrelia burgdorferi
+  aliases:
+  - B. burgdorferi
+  - Lyme disease bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.leptospira_interrogans
+  canonical_name: Leptospira interrogans
+  aliases:
+  - L. interrogans
+  - leptospirosis bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.woah_listed
+- id: bact.shigella_dysenteriae
+  canonical_name: Shigella dysenteriae
+  aliases:
+  - S. dysenteriae
+  - shigella
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: bact.campylobacter_jejuni
+  canonical_name: Campylobacter jejuni
+  aliases:
+  - C. jejuni
+  - campylobacter
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: bact.bacillus_anthracis
+  canonical_name: Bacillus anthracis
+  aliases:
+  - anthrax bacterium
+  - B. anthracis
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_anthrax
+  - src.cdc_bioterrorism
+- id: bact.bacillus_cereus_bv_anthracis
+  canonical_name: Bacillus cereus biovar anthracis
+  aliases:
+  - B. cereus biovar anthracis
+  - Bcbva
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: bact.yersinia_pestis
+  canonical_name: Yersinia pestis
+  aliases:
+  - Y. pestis
+  - plague bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: bact.francisella_tularensis
+  canonical_name: Francisella tularensis
+  aliases:
+  - F. tularensis
+  - tularemia bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: bact.burkholderia_mallei
+  canonical_name: Burkholderia mallei
+  aliases:
+  - B. mallei
+  - glanders bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+  - src.woah_listed
+- id: bact.burkholderia_pseudomallei
+  canonical_name: Burkholderia pseudomallei
+  aliases:
+  - B. pseudomallei
+  - melioidosis bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: bact.brucella_abortus
+  canonical_name: Brucella abortus
+  aliases:
+  - B. abortus
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.brucella_melitensis
+  canonical_name: Brucella melitensis
+  aliases:
+  - B. melitensis
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.brucella_suis
+  canonical_name: Brucella suis
+  aliases:
+  - B. suis
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.coxiella_burnetii
+  canonical_name: Coxiella burnetii
+  aliases:
+  - C. burnetii
+  - Q fever bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+  - src.woah_listed
+- id: bact.rickettsia_prowazekii
+  canonical_name: Rickettsia prowazekii
+  aliases:
+  - R. prowazekii
+  - epidemic typhus bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: bact.clostridium_botulinum
+  canonical_name: Clostridium botulinum
+  aliases:
+  - C. botulinum
+  - botulism bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: bact.mycoplasma_mycoides
+  canonical_name: Mycoplasma mycoides subsp. mycoides
+  aliases:
+  - contagious bovine pleuropneumonia agent
+  - CBPP agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.mycoplasma_capricolum
+  canonical_name: Mycoplasma capricolum subsp. capripneumoniae
+  aliases:
+  - contagious caprine pleuropneumonia agent
+  - CCPP agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.ehrlichia_ruminantium
+  canonical_name: Ehrlichia ruminantium
+  aliases:
+  - heartwater agent
+  - Cowdria ruminantium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: bact.agrobacterium_tumefaciens
+  canonical_name: Agrobacterium tumefaciens
+  aliases:
+  - crown gall bacterium
+  - A. tumefaciens
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.aps_crown_gall
+- id: bact.ralstonia_solanacearum_r3b2
+  canonical_name: Ralstonia solanacearum race 3 biovar 2
+  aliases:
+  - brown rot bacterium
+  - potato brown rot agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.apsnet
+- id: bact.rathayibacter_toxicus
+  canonical_name: Rathayibacter toxicus
+  aliases:
+  - annual ryegrass toxicity agent
+  - R. toxicus
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: bact.xylella_fastidiosa
+  canonical_name: Xylella fastidiosa
+  aliases:
+  - X. fastidiosa
+  - Pierce disease bacterium
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  - vector-borne
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.apsnet
+- id: bact.xanthomonas_oryzicola
+  canonical_name: Xanthomonas oryzae pv. oryzicola
+  aliases:
+  - bacterial leaf streak of rice agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: bact.liberibacter_asiaticus
+  canonical_name: Candidatus Liberibacter asiaticus
+  aliases:
+  - citrus greening bacterium
+  - huanglongbing agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  - vector-borne
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.apsnet
+- id: bact.erwinia_amylovora
+  canonical_name: Erwinia amylovora
+  aliases:
+  - fire blight bacterium
+  - E. amylovora
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: bact.xanthomonas_campestris
+  canonical_name: Xanthomonas campestris pv. campestris
+  aliases:
+  - black rot of crucifers agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: bact.pseudomonas_syringae
+  canonical_name: Pseudomonas syringae
+  aliases:
+  - P. syringae
+  - bacterial speck agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.apsnet
+- id: bact.clavibacter_michiganensis
+  canonical_name: Clavibacter michiganensis
+  aliases:
+  - bacterial canker of tomato agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: fungal.candida_auris
+  canonical_name: Candida auris
+  aliases:
+  - C. auris
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: fungal.candida_albicans
+  canonical_name: Candida albicans
+  aliases:
+  - C. albicans
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: fungal.aspergillus_fumigatus
+  canonical_name: Aspergillus fumigatus
+  aliases:
+  - A. fumigatus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: fungal.cryptococcus_neoformans
+  canonical_name: Cryptococcus neoformans
+  aliases:
+  - C. neoformans
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: fungal.histoplasma_capsulatum
+  canonical_name: Histoplasma capsulatum
+  aliases:
+  - H. capsulatum
+  - histoplasmosis fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: fungal.blastomyces_dermatitidis
+  canonical_name: Blastomyces dermatitidis
+  aliases:
+  - B. dermatitidis
+  - blastomycosis fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: fungal.talaromyces_marneffei
+  canonical_name: Talaromyces marneffei
+  aliases:
+  - Penicillium marneffei
+  - T. marneffei
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: fungal.pneumocystis_jirovecii
+  canonical_name: Pneumocystis jirovecii
+  aliases:
+  - P. jirovecii
+  - PCP fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: fungal.sporothrix_schenckii
+  canonical_name: Sporothrix schenckii
+  aliases:
+  - S. schenckii
+  - sporotrichosis fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: fungal.rhizopus_arrhizus
+  canonical_name: Rhizopus arrhizus
+  aliases:
+  - R. arrhizus
+  - mucormycosis fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: fungal.coccidioides_immitis
+  canonical_name: Coccidioides immitis
+  aliases:
+  - C. immitis
+  - valley fever fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_az
+- id: fungal.coccidioides_posadasii
+  canonical_name: Coccidioides posadasii
+  aliases:
+  - C. posadasii
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_az
+- id: fungal.histoplasma_farciminosum
+  canonical_name: Histoplasma farciminosum
+  aliases:
+  - H. farciminosum
+  - epizootic lymphangitis agent
+  agent_class: fungal
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: fungal.magnaporthe_oryzae
+  canonical_name: Magnaporthe oryzae
+  aliases:
+  - rice blast fungus
+  - Pyricularia oryzae
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.aps_rice_blast
+- id: fungal.cochliobolus_heterostrophus
+  canonical_name: Cochliobolus heterostrophus
+  aliases:
+  - Bipolaris maydis
+  - southern corn leaf blight fungus
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.apsnet
+- id: fungal.puccinia_graminis
+  canonical_name: Puccinia graminis
+  aliases:
+  - wheat stem rust fungus
+  - black stem rust
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.apsnet
+- id: fungal.phakopsora_pachyrhizi
+  canonical_name: Phakopsora pachyrhizi
+  aliases:
+  - soybean rust fungus
+  - Asian soybean rust
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: fungal.fusarium_graminearum
+  canonical_name: Fusarium graminearum
+  aliases:
+  - F. graminearum
+  - Fusarium head blight agent
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: fungal.sclerophthora_rayssiae
+  canonical_name: Sclerophthora rayssiae var. zeae
+  aliases:
+  - brown stripe downy mildew of maize agent
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: fungal.synchytrium_endobioticum
+  canonical_name: Synchytrium endobioticum
+  aliases:
+  - potato wart disease agent
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: fungal.ustilago_maydis
+  canonical_name: Ustilago maydis
+  aliases:
+  - corn smut fungus
+  - U. maydis
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.apsnet
+- id: fungal.zymoseptoria_tritici
+  canonical_name: Zymoseptoria tritici
+  aliases:
+  - Septoria tritici blotch agent
+  - Mycosphaerella graminicola
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: fungal.botrytis_cinerea
+  canonical_name: Botrytis cinerea
+  aliases:
+  - gray mold fungus
+  - B. cinerea
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.apsnet
+- id: fungal.sclerotinia_sclerotiorum
+  canonical_name: Sclerotinia sclerotiorum
+  aliases:
+  - white mold fungus
+  - S. sclerotiorum
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: fungal.coniothyrium_glycines
+  canonical_name: Coniothyrium glycines
+  aliases:
+  - red leaf blotch fungus
+  - Phoma glycines
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.apsnet
+- id: para.plasmodium_falciparum
+  canonical_name: Plasmodium falciparum
+  aliases:
+  - P. falciparum
+  - falciparum malaria parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_malaria
+- id: para.plasmodium_vivax
+  canonical_name: Plasmodium vivax
+  aliases:
+  - P. vivax
+  - vivax malaria parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_malaria
+- id: para.plasmodium_knowlesi
+  canonical_name: Plasmodium knowlesi
+  aliases:
+  - P. knowlesi
+  - knowlesi malaria parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_malaria
+- id: para.trypanosoma_brucei
+  canonical_name: Trypanosoma brucei
+  aliases:
+  - T. brucei
+  - sleeping sickness parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: para.trypanosoma_cruzi
+  canonical_name: Trypanosoma cruzi
+  aliases:
+  - T. cruzi
+  - Chagas disease parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: para.leishmania_donovani
+  canonical_name: Leishmania donovani
+  aliases:
+  - L. donovani
+  - visceral leishmaniasis parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: para.toxoplasma_gondii
+  canonical_name: Toxoplasma gondii
+  aliases:
+  - T. gondii
+  - toxoplasmosis parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: para.entamoeba_histolytica
+  canonical_name: Entamoeba histolytica
+  aliases:
+  - E. histolytica
+  - amoebiasis parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: para.giardia_lamblia
+  canonical_name: Giardia lamblia
+  aliases:
+  - G. lamblia
+  - Giardia duodenalis
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: para.cryptosporidium_parvum
+  canonical_name: Cryptosporidium parvum
+  aliases:
+  - C. parvum
+  - crypto parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: para.schistosoma_mansoni
+  canonical_name: Schistosoma mansoni
+  aliases:
+  - S. mansoni
+  - blood fluke
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: para.taenia_solium
+  canonical_name: Taenia solium
+  aliases:
+  - T. solium
+  - pork tapeworm
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: para.echinococcus_granulosus
+  canonical_name: Echinococcus granulosus
+  aliases:
+  - E. granulosus
+  - hydatid tapeworm
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: para.trichinella_spiralis
+  canonical_name: Trichinella spiralis
+  aliases:
+  - T. spiralis
+  - trichinosis parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: para.naegleria_fowleri
+  canonical_name: Naegleria fowleri
+  aliases:
+  - N. fowleri
+  - brain-eating amoeba
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+- id: para.onchocerca_volvulus
+  canonical_name: Onchocerca volvulus
+  aliases:
+  - O. volvulus
+  - river blindness parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - human-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: para.wuchereria_bancrofti
+  canonical_name: Wuchereria bancrofti
+  aliases:
+  - W. bancrofti
+  - lymphatic filariasis parasite
+  agent_class: parasitic
+  tags:
+  - infectious
+  - human-infecting
+  - vector-borne
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+  - src.who_priority
+- id: para.ascaris_lumbricoides
+  canonical_name: Ascaris lumbricoides
+  aliases:
+  - A. lumbricoides
+  - giant roundworm
+  agent_class: parasitic
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: prion.cwd
+  canonical_name: Chronic wasting disease prion
+  aliases:
+  - CWD prion
+  - PrP-CWD
+  agent_class: prion
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.cdc_cwd
+- id: prion.scrapie
+  canonical_name: Scrapie prion
+  aliases:
+  - PrP-Sc
+  - scrapie agent
+  agent_class: prion
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.woah_listed
+- id: prion.cjd
+  canonical_name: Creutzfeldt-Jakob disease prion
+  aliases:
+  - CJD prion
+  - human prion
+  agent_class: prion
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+- id: prion.bse
+  canonical_name: Bovine spongiform encephalopathy prion
+  aliases:
+  - BSE prion
+  - mad cow disease agent
+  agent_class: prion
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.woah_listed
+- id: toxin.cholera_toxin
+  canonical_name: Cholera toxin
+  aliases:
+  - choleragen
+  - CTX
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.cdc_cholera
+- id: toxin.diphtheria_toxin
+  canonical_name: Diphtheria toxin
+  aliases:
+  - DT
+  - diphtheria exotoxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: toxin.tetanus_toxin
+  canonical_name: Tetanus toxin
+  aliases:
+  - tetanospasmin
+  - TeNT
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+- id: toxin.pertussis_toxin
+  canonical_name: Pertussis toxin
+  aliases:
+  - PT
+  - PTx
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: toxin.aflatoxin_b1
+  canonical_name: Aflatoxin B1
+  aliases:
+  - AFB1
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.cdc_az
+- id: toxin.alpha_amanitin
+  canonical_name: Alpha-amanitin
+  aliases:
+  - a-amanitin
+  - amatoxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.cdc_az
+- id: toxin.brevetoxin
+  canonical_name: Brevetoxin
+  aliases:
+  - PbTx
+  - red tide toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: toxin.ciguatoxin
+  canonical_name: Ciguatoxin
+  aliases:
+  - CTX fish toxin
+  - ciguatera toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  broad_eligible: true
+  high_risk: false
+  transmissibility: 0
+  virulence: 1
+  source_ids:
+  - src.cdc_az
+- id: toxin.botulinum_neurotoxin
+  canonical_name: Botulinum neurotoxin
+  aliases:
+  - BoNT
+  - botox toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: toxin.ricin
+  canonical_name: Ricin
+  aliases:
+  - ricin toxin
+  - RCA60
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: toxin.abrin
+  canonical_name: Abrin
+  aliases:
+  - abrin toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.saxitoxin
+  canonical_name: Saxitoxin
+  aliases:
+  - STX
+  - paralytic shellfish toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.tetrodotoxin
+  canonical_name: Tetrodotoxin
+  aliases:
+  - TTX
+  - pufferfish toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.staphylococcal_enterotoxin_b
+  canonical_name: Staphylococcal enterotoxin B
+  aliases:
+  - SEB
+  - staph enterotoxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 1
+  source_ids:
+  - src.fsap_select_agents
+  - src.cdc_bioterrorism
+- id: toxin.t2_toxin
+  canonical_name: T-2 toxin
+  aliases:
+  - T-2 mycotoxin
+  - trichothecene mycotoxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.diacetoxyscirpenol
+  canonical_name: Diacetoxyscirpenol
+  aliases:
+  - DAS
+  - anguidine
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.epsilon_toxin
+  canonical_name: Clostridium perfringens epsilon toxin
+  aliases:
+  - ETX
+  - epsilon toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.conotoxin
+  canonical_name: Conotoxins
+  aliases:
+  - cone snail toxins
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+- id: toxin.shigatoxin
+  canonical_name: Shigatoxin
+  aliases:
+  - Stx
+  - Shiga toxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: virus.lujo
+  canonical_name: Lujo virus
+  aliases:
+  - LUJV
+  - Lujo hemorrhagic fever virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.australia_group
+- id: virus.variola_minor
+  canonical_name: Variola minor virus (Alastrim)
+  aliases:
+  - alastrim virus
+  - variola minor
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - us-select-agent
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: true
+  transmissibility: 4
+  virulence: 1
+  source_ids:
+  - src.fsap_select_agents
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.mucambo
+  canonical_name: Mucambo virus
+  aliases:
+  - MUCV
+  - Venezuelan equine encephalitis complex subtype IIIA
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.everglades
+  canonical_name: Everglades virus
+  aliases:
+  - EVEV
+  - Venezuelan equine encephalitis complex subtype II
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.ndumu
+  canonical_name: Ndumu virus
+  aliases:
+  - NDUV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.mayaro
+  canonical_name: Mayaro virus
+  aliases:
+  - MAYV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.rocio
+  canonical_name: Rocio virus
+  aliases:
+  - ROCV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.murray_valley
+  canonical_name: Murray Valley encephalitis virus
+  aliases:
+  - MVEV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.dobrava_belgrade
+  canonical_name: Dobrava-Belgrade virus
+  aliases:
+  - DOBV
+  - Dobrava virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.hantaan
+  canonical_name: Hantaan virus
+  aliases:
+  - HTNV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.seoul
+  canonical_name: Seoul virus
+  aliases:
+  - SEOV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.australia_group
+- id: virus.andes
+  canonical_name: Andes virus
+  aliases:
+  - ANDV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 3
+  source_ids:
+  - src.australia_group
+- id: virus.laguna_negra
+  canonical_name: Laguna Negra virus
+  aliases:
+  - LANV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: virus.choclo
+  canonical_name: Choclo virus
+  aliases:
+  - CHOV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: virus.oropouche
+  canonical_name: Oropouche virus
+  aliases:
+  - OROV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.australia_group
+- id: virus.powassan
+  canonical_name: Powassan virus
+  aliases:
+  - POWV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 3
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.st_louis
+  canonical_name: St. Louis encephalitis virus
+  aliases:
+  - SLEV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.weev
+  canonical_name: Western equine encephalitis virus
+  aliases:
+  - WEEV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.louping_ill
+  canonical_name: Louping ill virus
+  aliases:
+  - LIV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: virus.herpes_b
+  canonical_name: Macacine alphaherpesvirus 1 (B virus)
+  aliases:
+  - herpes B virus
+  - herpesvirus simiae
+  - CeHV-1
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.getah
+  canonical_name: Getah virus
+  aliases:
+  - GETV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.sagiyama
+  canonical_name: Sagiyama virus
+  aliases:
+  - SAGV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.middleburg
+  canonical_name: Middleburg virus
+  aliases:
+  - MIDV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.mobala
+  canonical_name: Mobala virus
+  aliases:
+  - MOBV
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: virus.porcine_teschovirus
+  canonical_name: Porcine teschovirus
+  aliases:
+  - PTV
+  - Teschen-Talfan virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: virus.suid_herpesvirus_1
+  canonical_name: Suid herpesvirus 1 (pseudorabies)
+  aliases:
+  - SuHV-1
+  - Aujeszky's disease virus
+  - pseudorabies virus
+  agent_class: viral
+  tags:
+  - infectious
+  - mammal-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: bact.rickettsia_rickettsii
+  canonical_name: Rickettsia rickettsii
+  aliases:
+  - R. rickettsii
+  - Rocky Mountain spotted fever agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+- id: bact.rickettsia_typhi
+  canonical_name: Rickettsia typhi
+  aliases:
+  - R. typhi
+  - Rickettsia mooseri
+  - murine typhus agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - vector-borne
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: bact.brucella_canis
+  canonical_name: Brucella canis
+  aliases:
+  - B. canis
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: bact.shigella_boydii
+  canonical_name: Shigella boydii
+  aliases:
+  - S. boydii
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: bact.shigella_flexneri
+  canonical_name: Shigella flexneri
+  aliases:
+  - S. flexneri
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: bact.chlamydophila_psittaci
+  canonical_name: Chlamydophila psittaci
+  aliases:
+  - Chlamydia psittaci
+  - psittacosis agent
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: bact.clostridium_argentinense
+  canonical_name: Clostridium argentinense
+  aliases:
+  - C. argentinense
+  - Clostridium botulinum type G
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.australia_group
+- id: bact.clostridium_baratii
+  canonical_name: Clostridium baratii
+  aliases:
+  - C. baratii
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.australia_group
+- id: bact.clostridium_butyricum
+  canonical_name: Clostridium butyricum
+  aliases:
+  - C. butyricum
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - us-select-agent
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.fsap_select_agents
+  - src.australia_group
+- id: bact.yersinia_pseudotuberculosis
+  canonical_name: Yersinia pseudotuberculosis
+  aliases:
+  - Y. pseudotuberculosis
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 1
+  source_ids:
+  - src.australia_group
+- id: bact.clostridium_perfringens
+  canonical_name: Clostridium perfringens
+  aliases:
+  - C. perfringens
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: bact.clostridium_tetani
+  canonical_name: Clostridium tetani
+  aliases:
+  - C. tetani
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - animal-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 1
+  virulence: 3
+  source_ids:
+  - src.australia_group
+- id: bact.salmonella_typhi
+  canonical_name: Salmonella enterica serovar Typhi
+  aliases:
+  - Salmonella typhi
+  - S. Typhi
+  - typhoid bacillus
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: bact.salmonella_paratyphi
+  canonical_name: Salmonella enterica serovar Paratyphi
+  aliases:
+  - Salmonella paratyphi A
+  - Salmonella Paratyphi B
+  - Salmonella Paratyphi C
+  - S. Paratyphi
+  - paratyphoid bacillus
+  agent_class: bacterial
+  tags:
+  - infectious
+  - mammal-infecting
+  - human-infecting
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+- id: bact.xanthomonas_oryzae
+  canonical_name: Xanthomonas oryzae pv. oryzae
+  aliases:
+  - bacterial blight of rice agent
+  - Xoo
+  agent_class: bacterial
+  tags:
+  - infectious
+  - plant-infecting
+  - us-select-agent
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 2
+  virulence: 2
+  source_ids:
+  - src.fsap_select_agents
+- id: fungal.fusarium_langsethiae
+  canonical_name: Fusarium langsethiae
+  aliases:
+  - F. langsethiae
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: fungal.fusarium_sporotrichioides
+  canonical_name: Fusarium sporotrichioides
+  aliases:
+  - F. sporotrichioides
+  agent_class: fungal
+  tags:
+  - infectious
+  - plant-infecting
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 3
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: toxin.clostridium_perfringens_enterotoxin
+  canonical_name: Clostridium perfringens enterotoxin
+  aliases:
+  - CPE
+  - perfringens enterotoxin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - uk-schedule-5
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 1
+  source_ids:
+  - src.uk_schedule_5
+- id: toxin.modeccin
+  canonical_name: Modeccin
+  aliases:
+  - modeccin toxin
+  - Adenia digitata lectin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: toxin.viscumin
+  canonical_name: Viscumin
+  aliases:
+  - Viscum album lectin 1
+  - mistletoe lectin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: toxin.volkensin
+  canonical_name: Volkensin
+  aliases:
+  - volkensin toxin
+  - Adenia volkensii lectin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - uk-schedule-5
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.uk_schedule_5
+  - src.australia_group
+- id: toxin.ht2_toxin
+  canonical_name: HT-2 toxin
+  aliases:
+  - HT-2 mycotoxin
+  - HT2
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: toxin.microcystin
+  canonical_name: Microcystins
+  aliases:
+  - microcystin-LR
+  - cyanoginosin
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: toxin.gonyautoxin
+  canonical_name: Gonyautoxins
+  aliases:
+  - GTX
+  - gonyautoxin GTX1-4
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.australia_group
+- id: toxin.nodularin
+  canonical_name: Nodularins
+  aliases:
+  - nodularin-R
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 2
+  source_ids:
+  - src.australia_group
+- id: toxin.palytoxin
+  canonical_name: Palytoxin
+  aliases:
+  - PlTX
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.australia_group
+- id: toxin.neosaxitoxin
+  canonical_name: Neosaxitoxin
+  aliases:
+  - NEO
+  - neoSTX
+  agent_class: toxin or chemical
+  tags:
+  - toxin
+  - australia-group
+  broad_eligible: false
+  high_risk: false
+  transmissibility: 0
+  virulence: 3
+  source_ids:
+  - src.australia_group

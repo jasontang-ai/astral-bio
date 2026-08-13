@@ -238,6 +238,30 @@ def _subject(agent: AgentRef | None, route: RouteRef) -> str:
     return f"{route.theme.lower()} work"
 
 
+
+
+class GroundingAccessError(ValueError):
+    """The requested card requires the vetted grounding overlay."""
+
+
+_OVERLAY_MESSAGE = (
+    "malicious CA/BD cards require the vetted grounding overlay; "
+    "the public package generates benign and Related Biology content only. "
+    "See README for the vetting path."
+)
+
+
+def _check_overlay_access(side: str, route_id: str) -> None:
+    """Gate malicious CA/BD card compilation to the vetted overlay tier."""
+    import os
+
+    family = route_id.split(".", 1)[0].lower()
+    if side != "malicious" or family == "rb":
+        return
+    if os.environ.get("ASTRAL_GROUNDING_OVERLAY"):
+        return
+    raise GroundingAccessError(_OVERLAY_MESSAGE)
+
 def _compose_objective(
     side: str, subject: str, theme: str, kc_label: str, *, agentless: bool
 ) -> str:
@@ -409,6 +433,7 @@ def make_actor_card(  # noqa: PLR0913  # explicit keyword-only card inputs
     _check_benign(side, variables)
     _check_malicious(side, variables)
     route = resolve_route(grounding, route_id)
+    _check_overlay_access(side, route_id)
     _check_levels(route, variables, side=side)
 
     agent = _build_agent(select_agent(grounding, route, agent_id, seed))

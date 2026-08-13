@@ -1,0 +1,1633 @@
+# Normalized BioTIER tool/database lookup used by ASTRAL card compilation.
+# Selection is simulated conversation context only; no external tool is executed.
+schema_id: astral.biotool_database.lookup
+schema_version: 1
+lookup_id: astral_biotool_and_database
+lookup_version: 1
+purpose: Controlled BioTIER tool and database menu for deterministic simulated conversation context. This lookup does not grant executable tool access.
+provenance:
+  source_catalog: biotier_astral_biotool_catalog_provenance_patch
+  source_path: BioTIER_+_BioTools/working/remediation/04_biotool_catalog_payload.yaml
+  source_sha256: 05d992341a9b9c5ebb93743d234a58b1ee3fc1649b41918cfdeb8e81b00481c9
+  research_date: '2026-07-21'
+  completeness_scope: Coverage of materially distinct capability categories; not an enumeration of every tool worldwide.
+selection:
+  strategy: deterministic_uniform
+  seed_namespace: biotool_database
+  candidate_order: id_ascending
+  mode: simulated_conversation_only
+  no_selection_when_route_categories_empty: true
+categories:
+- id: btc.protein_design
+  short_label: Protein design
+  capability: Designs protein sequences or structures subject to broad structural, interaction, or functional constraints.
+  tool_ids:
+  - tool.chroma
+  - tool.esm_if1
+  - tool.ligandmpnn
+  - tool.proteinmpnn
+  - tool.rfdiffusion
+  - tool.rosetta
+  source_ids:
+  - src.seed_bio_tools
+  - src.proteinmpnn
+  - src.ligandmpnn
+  - src.rfdiffusion
+  - src.esm
+  category_origin: supplied
+- id: btc.structure_prediction
+  short_label: Biomolecular structure prediction
+  capability: Predicts three-dimensional structures of proteins or biomolecular complexes from sequence and related inputs.
+  tool_ids:
+  - tool.alphafold2
+  - tool.alphafold3
+  - tool.boltz2
+  - tool.chai1
+  - tool.colabfold
+  - tool.esmfold
+  - tool.rfaa
+  - tool.rosettafold
+  source_ids:
+  - src.seed_bio_tools
+  - src.alphafold
+  - src.alphafold3
+  - src.rfaa
+  - src.boltz
+  - src.chai1
+  category_origin: supplied
+- id: btc.small_molecule_design
+  short_label: Small-molecule design
+  capability: Generates or ranks small molecules against broad target and property objectives.
+  tool_ids:
+  - tool.diffsbbd
+  - tool.fepplus
+  - tool.pocket2mol
+  - tool.reinvent4
+  - tool.targetdiff
+  source_ids:
+  - src.seed_bio_tools
+  - src.reinvent4
+  category_origin: supplied
+- id: btc.vaccine_design
+  short_label: Vaccine and epitope design
+  capability: Prioritizes antigens, epitopes, or vaccine candidates from pathogen and host-immunity information.
+  tool_ids:
+  - tool.bepipred
+  - tool.iedb_ar
+  - tool.netmhciipan
+  - tool.netmhcpan
+  - tool.vaxign2
+  - tool.vaxijen
+  source_ids:
+  - src.seed_bio_tools
+  - src.vaxign2
+  - src.iedb
+  - src.netmhcpan
+  category_origin: supplied
+- id: btc.viral_vector_design
+  short_label: Viral-vector capsid design
+  capability: Designs or ranks viral-vector capsids for delivery and manufacturability objectives.
+  tool_ids:
+  - tool.capsida_platform
+  - tool.dyno_cap
+  - tool.origami_aav
+  - tool.vectorbuilder_capsid
+  source_ids:
+  - src.seed_bio_tools
+  - src.aav_ml_paper
+  - src.dyno
+  category_origin: supplied
+- id: btc.genetic_sequence_design
+  short_label: Genetic sequence and editing design
+  capability: Analyzes or optimizes genetic constructs, expression features, and genome-editing guide choices.
+  tool_ids:
+  - tool.benchling
+  - tool.chopchop
+  - tool.geneoptimizer
+  - tool.guidescan2
+  - tool.jcat
+  - tool.tisigner
+  source_ids:
+  - src.seed_bio_tools
+  - src.chopchop
+  category_origin: supplied
+- id: btc.genome_assembly
+  short_label: Genome assembly and polishing
+  capability: Assembles sequencing reads into consensus sequences or improves read and assembly consensus quality.
+  tool_ids:
+  - tool.canu
+  - tool.deepconsensus
+  - tool.flye
+  - tool.hifiasm
+  - tool.medaka
+  - tool.spades
+  - tool.verkko
+  source_ids:
+  - src.seed_bio_tools
+  - src.deepconsensus
+  - src.medaka
+  category_origin: supplied
+- id: btc.toxicity_prediction
+  short_label: Toxicity and ADMET prediction
+  capability: Predicts broad toxicity or ADMET properties of peptides and small molecules.
+  tool_ids:
+  - tool.admetlab3
+  - tool.admetsar3
+  - tool.pkcsm
+  - tool.protox3
+  - tool.toxinpred2
+  - tool.toxtree
+  source_ids:
+  - src.seed_bio_tools
+  - src.protox3
+  - src.admetsar3
+  category_origin: supplied
+- id: btc.pathogen_property_prediction
+  short_label: Pathogen property prediction
+  capability: Predicts broad pathogen-associated properties such as host range, spillover risk, virulence features, or immune escape.
+  tool_ids:
+  - tool.evescape
+  - tool.islandpath
+  - tool.pathogenfinder
+  - tool.spillover
+  - tool.virulencefinder
+  source_ids:
+  - src.seed_bio_tools
+  - src.spillover
+  - src.evescape
+  - src.pathogenfinder
+  category_origin: supplied
+- id: btc.host_pathogen_interaction
+  short_label: Host-pathogen interaction prediction
+  capability: Predicts or organizes molecular interactions between host and pathogen components.
+  tool_ids:
+  - tool.alphafold3
+  - tool.dscript
+  - tool.escape_calculator
+  - tool.hpidb3
+  - tool.phipster
+  source_ids:
+  - src.seed_bio_tools
+  - src.alphafold3
+  - src.hpidb
+  category_origin: supplied
+- id: btc.immune_system_modeling
+  short_label: Immune recognition modeling
+  capability: Models immune-receptor, epitope, MHC, or immune-repertoire relationships.
+  tool_ids:
+  - tool.deeptcr
+  - tool.ergo2
+  - tool.nettcr22
+  - tool.pmtnet
+  - tool.tcrdist3
+  source_ids:
+  - src.seed_bio_tools
+  - src.nettcr
+  category_origin: supplied
+- id: btc.experiment_design
+  short_label: Experiment design and optimization
+  capability: Selects informative experimental conditions or proposes campaign-level experimental plans from stated objectives and variables.
+  tool_ids:
+  - tool.ax
+  - tool.baybe
+  - tool.botorch
+  - tool.olympus
+  - tool.summit
+  source_ids:
+  - src.seed_bio_tools
+  - src.botorch
+  category_origin: supplied
+- id: btc.experimental_simulation
+  short_label: Molecular and biological simulation
+  capability: Simulates molecular, biochemical, cellular, or multicellular systems and predicts in-silico outcomes.
+  tool_ids:
+  - tool.bionetgen
+  - tool.copasi
+  - tool.gromacs
+  - tool.openmm
+  - tool.physicell
+  - tool.vcell
+  source_ids:
+  - src.seed_bio_tools
+  - src.openmm
+  - src.copasi
+  category_origin: supplied
+- id: btc.autonomous_experimentation
+  short_label: Autonomous and cloud laboratories
+  capability: Executes or orchestrates physical experiments through cloud laboratories, robotics, or closed-loop experimental systems.
+  tool_ids:
+  - tool.coscientist
+  - tool.ecl
+  - tool.opentrons
+  - tool.sample
+  - tool.strateos
+  - tool.synthace
+  source_ids:
+  - src.seed_bio_tools
+  - src.emerald
+  - src.strateos
+  - src.opentrons
+  category_origin: supplied
+- id: btc.variant_effect_prediction
+  short_label: Variant-effect prediction
+  capability: Scores how sequence variants may affect protein fitness, stability, function, or phenotype.
+  tool_ids:
+  - tool.alphamissense
+  - tool.esm1v
+  - tool.eve
+  - tool.evescape
+  - tool.foldx
+  - tool.gemme
+  source_ids:
+  - src.seed_bio_tools
+  - src.eve
+  - src.evescape
+  - src.esm
+  category_origin: supplied
+- id: btc.nucleic_acid_screening
+  short_label: Synthetic nucleic-acid screening
+  capability: Screens synthetic nucleic-acid requests or sequences for identity- and function-based biosecurity concerns.
+  tool_ids:
+  - tool.aclid
+  - tool.blast
+  - tool.fastna
+  - tool.ibbis_common
+  - tool.securedna
+  - tool.seqscreen
+  - tool.threatseq
+  source_ids:
+  - src.seed_bio_tools
+  - src.securedna
+  - src.ibbis_common
+  - src.igsc_hsp
+  category_origin: supplied
+- id: btc.synthesis_pathway_planning
+  short_label: Chemical and biosynthetic pathway planning
+  capability: Plans chemical retrosynthesis routes or candidate biochemical pathways and enzymes for target compounds.
+  tool_ids:
+  - tool.aizynthfinder
+  - tool.askcos
+  - tool.galaxy_synbiocad
+  - tool.retropath2
+  - tool.selenzyme
+  - tool.synthia
+  source_ids:
+  - src.seed_bio_tools
+  - src.retropath2
+  - src.askcos
+  - src.synthia
+  category_origin: supplied
+- id: btc.pathogen_identification_genomics
+  short_label: Pathogen identification and genomic surveillance
+  capability: Classifies pathogen sequence data and supports genome annotation, comparative analysis, phylogenetics, and genomic surveillance.
+  tool_ids:
+  - tool.blast
+  - tool.bvbrc
+  - tool.czid
+  - tool.kraken2
+  - tool.nextstrain
+  source_ids:
+  - src.seed_bio_tools
+  - src.kraken2
+  - src.czid
+  - src.bvbrc
+  - src.nextstrain
+  category_origin: research_addition
+- id: btc.epidemiological_modeling
+  short_label: Epidemiological and outbreak modeling
+  capability: Estimates transmission metrics or simulates population-level infectious-disease spread and interventions.
+  tool_ids:
+  - tool.covasim
+  - tool.epiestim
+  - tool.epimodel
+  - tool.starsim
+  source_ids:
+  - src.epiestim
+  - src.epimodel
+  - src.covasim
+  - src.starsim
+  category_origin: research_addition
+entries:
+- id: tool.aclid
+  canonical_name: Aclid
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.nucleic_acid_screening
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - gene-synthesis compliance context
+- id: tool.admetlab3
+  canonical_name: ADMETlab 3.0
+  kind: biotool
+  aliases:
+  - ADMETlab 2.0
+  category_ids:
+  - btc.toxicity_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule context
+- id: tool.admetsar3
+  canonical_name: admetSAR 3.0
+  kind: biotool
+  aliases:
+  - admetSAR 2.0
+  category_ids:
+  - btc.toxicity_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.admetsar3
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - small-molecule context
+- id: tool.aizynthfinder
+  canonical_name: AiZynthFinder
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.synthesis_pathway_planning
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule synthesis context
+- id: tool.alphafold2
+  canonical_name: AlphaFold 2
+  kind: biotool
+  aliases:
+  - AlphaFold2
+  - AlphaFold-Multimer
+  - AlphaFold Multimer
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.alphafold
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biomolecular structure context
+- id: tool.alphafold3
+  canonical_name: AlphaFold 3
+  kind: biotool
+  aliases:
+  - AlphaFold3
+  - AlphaFold Server
+  category_ids:
+  - btc.host_pathogen_interaction
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.alphafold3
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biomolecular complex context
+- id: tool.alphamissense
+  canonical_name: AlphaMissense
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.variant_effect_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - human missense-variant context
+- id: tool.askcos
+  canonical_name: ASKCOS
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.synthesis_pathway_planning
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.askcos
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - small-molecule synthesis context
+- id: tool.ax
+  canonical_name: Ax
+  kind: biotool
+  aliases:
+  - Ax Platform
+  category_ids:
+  - btc.experiment_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.baybe
+  canonical_name: BayBE
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experiment_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.benchling
+  canonical_name: Benchling
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genetic_sequence_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.bepipred
+  canonical_name: BepiPred
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.vaccine_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein or peptide B-cell epitope context
+- id: tool.bionetgen
+  canonical_name: BioNetGen
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experimental_simulation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - rule-based biochemical-system context
+- id: tool.blast
+  canonical_name: NCBI BLAST
+  kind: biotool
+  aliases:
+  - BLAST
+  - blastn
+  - blastp
+  category_ids:
+  - btc.nucleic_acid_screening
+  - btc.pathogen_identification_genomics
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.boltz2
+  canonical_name: Boltz-2
+  kind: biotool
+  aliases:
+  - Boltz2
+  - Boltz-1
+  - Boltz1
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.boltz
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biomolecular complex context
+- id: tool.botorch
+  canonical_name: BoTorch
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experiment_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.botorch
+  information_layer: seed_tool_with_web_validation
+- id: tool.bvbrc
+  canonical_name: BV-BRC
+  kind: database
+  aliases:
+  - PATRIC
+  category_ids:
+  - btc.pathogen_identification_genomics
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.bvbrc
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - bacterial or viral genome-analysis context
+- id: tool.canu
+  canonical_name: Canu
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - long-read context
+- id: tool.capsida_platform
+  canonical_name: Capsida AAV engineering platform
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.viral_vector_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - AAV vector context
+- id: tool.chai1
+  canonical_name: Chai-1
+  kind: biotool
+  aliases:
+  - Chai 1
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.chai1
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biomolecular complex context
+- id: tool.chopchop
+  canonical_name: CHOPCHOP
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genetic_sequence_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.chopchop
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - genome-editing guide context
+- id: tool.chroma
+  canonical_name: Chroma
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.protein_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.colabfold
+  canonical_name: ColabFold
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein context
+- id: tool.copasi
+  canonical_name: COPASI
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experimental_simulation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.copasi
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biochemical-system context
+- id: tool.coscientist
+  canonical_name: Coscientist
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.autonomous_experimentation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.covasim
+  canonical_name: Covasim
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.epidemiological_modeling
+  active: true
+  source_ids:
+  - src.covasim
+  information_layer: web_research_addition
+  compatibility_constraints:
+  - infectious-disease transmission-model context
+- id: tool.czid
+  canonical_name: CZ ID
+  kind: biotool
+  aliases:
+  - IDseq
+  category_ids:
+  - btc.pathogen_identification_genomics
+  active: true
+  source_ids:
+  - src.czid
+  information_layer: web_research_addition
+  compatibility_constraints:
+  - metagenomic pathogen-detection context
+- id: tool.deepconsensus
+  canonical_name: DeepConsensus
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.deepconsensus
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - PacBio CCS or HiFi read context
+- id: tool.deeptcr
+  canonical_name: DeepTCR
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.immune_system_modeling
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - T-cell receptor repertoire context
+- id: tool.diffsbbd
+  canonical_name: DiffSBDD
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.small_molecule_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule and target-structure context
+- id: tool.dscript
+  canonical_name: D-SCRIPT
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.host_pathogen_interaction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein-pair context
+- id: tool.dyno_cap
+  canonical_name: Dyno capsid platform
+  kind: biotool
+  aliases:
+  - Dyno CAP
+  category_ids:
+  - btc.viral_vector_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.dyno
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - AAV vector context
+- id: tool.ecl
+  canonical_name: Emerald Cloud Lab
+  kind: biotool
+  aliases:
+  - ECL
+  category_ids:
+  - btc.autonomous_experimentation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.emerald
+  information_layer: seed_tool_with_web_validation
+- id: tool.epiestim
+  canonical_name: EpiEstim
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.epidemiological_modeling
+  active: true
+  source_ids:
+  - src.epiestim
+  information_layer: web_research_addition
+  compatibility_constraints:
+  - incidence-time-series context
+- id: tool.epimodel
+  canonical_name: EpiModel
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.epidemiological_modeling
+  active: true
+  source_ids:
+  - src.epimodel
+  information_layer: web_research_addition
+  compatibility_constraints:
+  - infectious-disease transmission-model context
+- id: tool.ergo2
+  canonical_name: ERGO-II
+  kind: biotool
+  aliases:
+  - ERGO
+  - ERGO2.0
+  category_ids:
+  - btc.immune_system_modeling
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - T-cell receptor and peptide context
+- id: tool.escape_calculator
+  canonical_name: Escape Calculator
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.host_pathogen_interaction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - SARS-CoV-2 antibody-escape context
+- id: tool.esm1v
+  canonical_name: ESM-1v
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.variant_effect_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.esm
+  information_layer: seed_tool_with_web_validation
+  source_catalog_status: available_from_archived_official_repository
+  compatibility_constraints:
+  - protein variant context
+- id: tool.esm_if1
+  canonical_name: ESM-IF1
+  kind: biotool
+  aliases:
+  - ESM-IF
+  category_ids:
+  - btc.protein_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.esm
+  information_layer: seed_tool_with_web_validation
+  source_catalog_status: available_from_archived_official_repository
+  compatibility_constraints:
+  - protein inverse-folding context
+- id: tool.esmfold
+  canonical_name: ESMFold
+  kind: biotool
+  aliases:
+  - ESM Fold
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.esm
+  information_layer: seed_tool_with_web_validation
+  source_catalog_status: available_from_archived_official_repository
+  compatibility_constraints:
+  - protein context
+- id: tool.eve
+  canonical_name: EVE
+  kind: biotool
+  aliases:
+  - Evolutionary model of Variant Effect
+  category_ids:
+  - btc.variant_effect_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.eve
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - protein variant context
+- id: tool.evescape
+  canonical_name: EVEscape
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.pathogen_property_prediction
+  - btc.variant_effect_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.evescape
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - viral protein and immune-escape context
+- id: tool.fastna
+  canonical_name: FAST-NA Scanner
+  kind: biotool
+  aliases:
+  - FAST-NA
+  category_ids:
+  - btc.nucleic_acid_screening
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - nucleic-acid screening context
+- id: tool.fepplus
+  canonical_name: Schrödinger FEP+
+  kind: biotool
+  aliases:
+  - FEP+
+  category_ids:
+  - btc.small_molecule_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule context
+- id: tool.flye
+  canonical_name: Flye
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - long-read context
+- id: tool.foldx
+  canonical_name: FoldX
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.variant_effect_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein structure context
+- id: tool.galaxy_synbiocad
+  canonical_name: Galaxy-SynBioCAD
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.synthesis_pathway_planning
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - biochemical pathway context
+- id: tool.gemme
+  canonical_name: GEMME
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.variant_effect_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein variant context
+- id: tool.geneoptimizer
+  canonical_name: GeneOptimizer
+  kind: biotool
+  aliases:
+  - GeneArt GeneOptimizer
+  category_ids:
+  - btc.genetic_sequence_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.gromacs
+  canonical_name: GROMACS
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experimental_simulation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - molecular simulation context
+- id: tool.guidescan2
+  canonical_name: GuideScan 2
+  kind: biotool
+  aliases:
+  - GuideScan
+  - Guidescan
+  category_ids:
+  - btc.genetic_sequence_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - genome-editing guide context
+- id: tool.hifiasm
+  canonical_name: hifiasm
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - PacBio HiFi read context
+- id: tool.hpidb3
+  canonical_name: HPIDB 3.0
+  kind: database
+  aliases:
+  - HPIDB
+  category_ids:
+  - btc.host_pathogen_interaction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.hpidb
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - host-pathogen interaction context
+- id: tool.ibbis_common
+  canonical_name: IBBIS Common Mechanism Screening Software
+  kind: biotool
+  aliases:
+  - Common Mechanism
+  category_ids:
+  - btc.nucleic_acid_screening
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.ibbis_common
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - synthetic nucleic-acid screening context
+- id: tool.iedb_ar
+  canonical_name: IEDB Analysis Resource
+  kind: database
+  aliases:
+  - IEDB tools
+  category_ids:
+  - btc.vaccine_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.iedb
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - immune epitope context
+- id: tool.islandpath
+  canonical_name: IslandPath-DIMOB
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.pathogen_property_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - bacterial genome context
+- id: tool.jcat
+  canonical_name: JCat
+  kind: biotool
+  aliases:
+  - Java Codon Adaptation Tool
+  category_ids:
+  - btc.genetic_sequence_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.kraken2
+  canonical_name: Kraken 2
+  kind: biotool
+  aliases:
+  - Kraken2
+  category_ids:
+  - btc.pathogen_identification_genomics
+  active: true
+  source_ids:
+  - src.kraken2
+  information_layer: web_research_addition
+  compatibility_constraints:
+  - sequence-read taxonomic-classification context
+- id: tool.ligandmpnn
+  canonical_name: LigandMPNN
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.protein_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.ligandmpnn
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - protein context with a modeled ligand or other non-protein component
+- id: tool.medaka
+  canonical_name: Medaka
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.medaka
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - Oxford Nanopore read context
+- id: tool.netmhciipan
+  canonical_name: NetMHCIIpan
+  kind: biotool
+  aliases:
+  - NetMHCII
+  category_ids:
+  - btc.vaccine_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - peptide and MHC class II context
+- id: tool.netmhcpan
+  canonical_name: NetMHCpan
+  kind: biotool
+  aliases:
+  - NetMHC
+  category_ids:
+  - btc.vaccine_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.netmhcpan
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - peptide and MHC class I context
+- id: tool.nettcr22
+  canonical_name: NetTCR-2.2
+  kind: biotool
+  aliases:
+  - NetTCR
+  - NetTCR-2.0
+  - NetTCR-2.1
+  category_ids:
+  - btc.immune_system_modeling
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.nettcr
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - T-cell receptor and peptide context
+- id: tool.nextstrain
+  canonical_name: Nextstrain
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.pathogen_identification_genomics
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.nextstrain
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - pathogen genomic-surveillance context
+- id: tool.olympus
+  canonical_name: Olympus
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experiment_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.openmm
+  canonical_name: OpenMM
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experimental_simulation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.openmm
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - molecular simulation context
+- id: tool.opentrons
+  canonical_name: Opentrons
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.autonomous_experimentation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.opentrons
+  information_layer: seed_tool_with_web_validation
+- id: tool.origami_aav
+  canonical_name: Origami
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.viral_vector_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - AAV capsid context
+- id: tool.pathogenfinder
+  canonical_name: PathogenFinder
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.pathogen_property_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.pathogenfinder
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - bacterial whole-genome sequence context
+- id: tool.phipster
+  canonical_name: P-HIPSTer
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.host_pathogen_interaction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - virus-host protein interaction context
+- id: tool.physicell
+  canonical_name: PhysiCell
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experimental_simulation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - multicellular simulation context
+- id: tool.pkcsm
+  canonical_name: pkCSM
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.toxicity_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule context
+- id: tool.pmtnet
+  canonical_name: pMTnet
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.immune_system_modeling
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - T-cell receptor, peptide, and MHC context
+- id: tool.pocket2mol
+  canonical_name: Pocket2Mol
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.small_molecule_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule and target-pocket context
+- id: tool.proteinmpnn
+  canonical_name: ProteinMPNN
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.protein_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.proteinmpnn
+  information_layer: seed_tool_with_web_validation
+- id: tool.protox3
+  canonical_name: ProTox-3.0
+  kind: biotool
+  aliases:
+  - ProTox-II
+  - ProTox 3.0
+  category_ids:
+  - btc.toxicity_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.protox3
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - small-molecule context
+- id: tool.reinvent4
+  canonical_name: REINVENT 4
+  kind: biotool
+  aliases:
+  - REINVENT
+  - REINVENT 2
+  - REINVENT 3
+  category_ids:
+  - btc.small_molecule_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.reinvent4
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - small-molecule context
+- id: tool.retropath2
+  canonical_name: RetroPath2.0
+  kind: biotool
+  aliases:
+  - RetroPath2
+  category_ids:
+  - btc.synthesis_pathway_planning
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.retropath2
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biochemical pathway context
+- id: tool.rfaa
+  canonical_name: RoseTTAFold All-Atom
+  kind: biotool
+  aliases:
+  - RFAA
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.rfaa
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - biomolecular complex context
+- id: tool.rfdiffusion
+  canonical_name: RFdiffusion
+  kind: biotool
+  aliases:
+  - RoseTTAFold diffusion
+  category_ids:
+  - btc.protein_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.rfdiffusion
+  information_layer: seed_tool_with_web_validation
+- id: tool.rosetta
+  canonical_name: Rosetta
+  kind: biotool
+  aliases:
+  - RosettaCommons
+  category_ids:
+  - btc.protein_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.rosettafold
+  canonical_name: RoseTTAFold
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.structure_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.sample
+  canonical_name: SAMPLE
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.autonomous_experimentation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein-engineering campaign context
+- id: tool.securedna
+  canonical_name: SecureDNA
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.nucleic_acid_screening
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.securedna
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - synthetic nucleic-acid screening context
+- id: tool.selenzyme
+  canonical_name: Selenzyme
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.synthesis_pathway_planning
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - biochemical pathway and enzyme-selection context
+- id: tool.seqscreen
+  canonical_name: SeqScreen
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.nucleic_acid_screening
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - nucleic-acid functional-screening context
+- id: tool.spades
+  canonical_name: SPAdes
+  kind: biotool
+  aliases:
+  - SPAdes assembler
+  - hybridSPAdes
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - genome or metagenome assembly context
+- id: tool.spillover
+  canonical_name: SpillOver
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.pathogen_property_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.spillover
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - viral zoonotic-risk context
+- id: tool.starsim
+  canonical_name: Starsim
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.epidemiological_modeling
+  active: true
+  source_ids:
+  - src.starsim
+  information_layer: web_research_addition
+  compatibility_constraints:
+  - infectious-disease agent-based-model context
+- id: tool.strateos
+  canonical_name: Strateos
+  kind: biotool
+  aliases:
+  - Transcriptic
+  category_ids:
+  - btc.autonomous_experimentation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.strateos
+  information_layer: seed_tool_with_web_validation
+- id: tool.summit
+  canonical_name: SUMMIT
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.experiment_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.synthace
+  canonical_name: Synthace
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.autonomous_experimentation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.synthia
+  canonical_name: Synthia
+  kind: biotool
+  aliases:
+  - Chematica
+  category_ids:
+  - btc.synthesis_pathway_planning
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.synthia
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - small-molecule synthesis context
+- id: tool.targetdiff
+  canonical_name: TargetDiff
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.small_molecule_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - small-molecule and target-pocket context
+- id: tool.tcrdist3
+  canonical_name: tcrdist3
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.immune_system_modeling
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - T-cell receptor repertoire context
+- id: tool.threatseq
+  canonical_name: ThreatSEQ
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.nucleic_acid_screening
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - synthetic nucleic-acid screening context
+- id: tool.tisigner
+  canonical_name: TIsigner
+  kind: biotool
+  aliases:
+  - TISIGNER
+  category_ids:
+  - btc.genetic_sequence_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+- id: tool.toxinpred2
+  canonical_name: ToxinPred2
+  kind: biotool
+  aliases:
+  - ToxinPred
+  category_ids:
+  - btc.toxicity_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - peptide context
+- id: tool.toxtree
+  canonical_name: Toxtree
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.toxicity_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - chemical context
+- id: tool.vaxign2
+  canonical_name: Vaxign2
+  kind: biotool
+  aliases:
+  - Vaxign
+  - Vaxign-ML
+  category_ids:
+  - btc.vaccine_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  - src.vaxign2
+  information_layer: seed_tool_with_web_validation
+  compatibility_constraints:
+  - pathogen protein or proteome context
+- id: tool.vaxijen
+  canonical_name: VaxiJen
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.vaccine_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - protein or peptide antigen context
+- id: tool.vcell
+  canonical_name: Virtual Cell
+  kind: biotool
+  aliases:
+  - VCell
+  category_ids:
+  - btc.experimental_simulation
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - cellular or biochemical-system context
+- id: tool.vectorbuilder_capsid
+  canonical_name: VectorBuilder AAV Capsid Evolution
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.viral_vector_design
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - AAV vector context
+- id: tool.verkko
+  canonical_name: Verkko
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.genome_assembly
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - long-read and genome-assembly context
+- id: tool.virulencefinder
+  canonical_name: VirulenceFinder
+  kind: biotool
+  aliases: []
+  category_ids:
+  - btc.pathogen_property_prediction
+  active: true
+  source_ids:
+  - src.seed_bio_tools
+  information_layer: supplied_seed_tool
+  compatibility_constraints:
+  - bacterial whole-genome sequence context
