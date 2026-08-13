@@ -64,6 +64,8 @@ end. Compiling a malicious CA/BD card without the vetted overlay raises
 ## Install
 
 ```bash
+git clone https://github.com/jasontang-ai/astral-bio
+cd astral-bio
 uv venv
 source .venv/bin/activate
 uv pip install -e '.[dev]'
