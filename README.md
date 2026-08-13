@@ -3,38 +3,33 @@
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-ASTRAL is an open framework for evaluating biosecurity risk in AI
-conversations. It generates multi-turn transcripts of malicious and benign
-actors under controlled conditions, and it scans transcripts to produce
-evidence-cited risk assessments.
+**The problem?** AI is becoming increasingly capable across dual-use domains
+like cyber and bio/CBRNe, with open models offering frontier capabilities with
+limited safeguards. Measuring what these systems hand to different actors, and
+where safeguards hold or fail, requires conversation data with known
+conditions and labels.
 
-AI assistants now answer questions across dual-use biology, and the agents
-built on them can use bio-tools. Measuring what these systems hand to
-different actors, and where safeguards hold or fail, requires conversation
-data with known conditions and labels. ASTRAL produces that data and the
-machinery to evaluate it.
+**ASTRAL** is a misuse detection platform with two main parts.
 
-## What it does
+**The data pipeline** generates multi-turn transcripts of malicious and benign
+actors at scale, with support for bio-tools and automated red teaming.
+Grounded in [SecureBio's BioTIER](https://securebio.org/biotier/) taxonomy and
+expert-curated misuse variables, it compiles actor cards, runs conversations
+on the [Petri Bloom](https://meridianlabs-ai.github.io/petri_bloom/) harness,
+labels metadata and turns with compliance (permit/refuse) and behavior to
+compute trajectories over many turns, and grades with judges. Evaluation
+conditions for each conversation are set at generation time with different
+combinations of ground truth variables, so model behavior can be traced back
+to known conditions.
 
-**Generate.** The pipeline compiles actor cards from grounded routes and
-variables (scientific capability, jailbreak strategy, kill-chain stage,
-intended scope, persistence), runs conversations on the
-[Petri Bloom](https://meridianlabs-ai.github.io/petri_bloom/) harness with
-bio-tool use and automated red teaming, and labels every turn with compliance,
-refusal characterization, and behavior trajectories. Conditions are set at
-generation with ground-truth variables, so behavior differences trace back to
-known conditions.
-
-**Scan.** The scanner, built on [Inspect AI](https://inspect.aisi.org.uk/) and
+**The scanner** (embedding filter + LLM + DSPy), built on
+[Inspect AI](https://inspect.aisi.org.uk/) and
 [Inspect Scout](https://meridianlabs-ai.github.io/inspect_scout/), reads
-transcripts and scores them against a rubric. It reports what the user appears
-to be pursuing, what capabilities and commitment they show, and how urgently
-the session needs review, with evidence cited from the transcript. The rubric
-supports DSPy prompt optimization so assessments improve as it is tuned on
-more data.
-
-Grounding follows [SecureBio's BioTIER](https://securebio.org/biotier/)
-taxonomy of biological risk sets.
+transcripts and scores against a rubric, with support for prompt optimization
+so its assessments improve as it is tuned on more transcripts. It reports an
+evidence-cited risk assessment: what the user appears to be pursuing, what
+capabilities and commitment they show, and how urgently the session needs
+review.
 
 ## The benign dataset
 
