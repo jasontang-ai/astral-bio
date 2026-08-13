@@ -49,9 +49,32 @@ def turns_from_transcript(messages: list[Any]) -> list[dict[str, Any]]:
     return turns
 
 
+# Transcripts longer than this use the evidence windows, not the full text.
+# Models have ~1M-token contexts now; the threshold is high so retrieval only
+# triggers on genuinely long stitched or multi-session logs.
+_MAX_FULL_TURNS = 256
+
+
+def _rubric_turns(turns: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """The turns the judge reads.
+
+    The full transcript, or the evidence windows when the transcript is long
+    (stitched or multi-session logs).
+    """
+    if len(turns) <= _MAX_FULL_TURNS:
+        return turns
+    from astral.scanner.evidence import (  # noqa: PLC0415  # deferred import
+        retrieve_evidence,
+    )
+
+    windows = retrieve_evidence(turns)
+    return [t for w in windows for t in w["turns"]]
+
+
 def _rubric_prompt(turns: list[dict[str, Any]], rubric_text: str) -> str:
     """Assemble the rubric classification prompt."""
     allowed = ", ".join(f"{var} choices {choices}" for var, choices in RUBRIC_CHOICES.items())
+    turns = _rubric_turns(turns)
     transcript_text = "\n".join(
         f"[{turn['turn_index']}] {turn['role']}: {turn['content']}" for turn in turns
     )

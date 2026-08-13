@@ -158,6 +158,17 @@ def records_to_examples(records: list[dict[str, Any]]) -> list[Any]:
     return examples
 
 
+def _variable_exact_match(variable: str, example: Any, prediction: Any) -> float:
+    """The exact-match score for one rubric variable."""
+    expected_raw = getattr(example, variable.lower(), "")
+    predicted_raw = getattr(prediction, variable.lower(), "")
+    if variable in RUBRIC_MULTI_SELECT:
+        expected = _parse_kc_label(expected_raw) or []
+        predicted = _parse_kc_label(predicted_raw) or []
+        return 1.0 if predicted == expected and expected else 0.0
+    return 1.0 if _normalize_choice(predicted_raw) == _normalize_choice(expected_raw) else 0.0
+
+
 def rubric_metric(example: Any, prediction: Any, trace: Any = None) -> float:
     """Mean per-variable exact-match reward across scorable rubric variables.
 
@@ -174,20 +185,7 @@ def rubric_metric(example: Any, prediction: Any, trace: Any = None) -> float:
     if not scored:
         return 0.0
     weight = 1.0 / len(scored)
-    score = 0.0
-    for variable in scored:
-        field = variable.lower()
-        expected_raw = getattr(example, field, "")
-        predicted_raw = getattr(prediction, field, "")
-        if variable in RUBRIC_MULTI_SELECT:
-            expected = _parse_kc_label(expected_raw) or []
-            predicted = _parse_kc_label(predicted_raw) or []
-            score += weight * (1.0 if predicted == expected and expected else 0.0)
-            continue
-        expected_str = _normalize_choice(expected_raw)
-        predicted_str = _normalize_choice(predicted_raw)
-        score += weight * (1.0 if predicted_str == expected_str else 0.0)
-    return score
+    return sum(weight * _variable_exact_match(v, example, prediction) for v in scored)
 
 
 class RubricClassifier:
@@ -242,7 +240,10 @@ def optimize_rubric(
     classifier = RubricClassifier(rubric_text)
 
     train_examples = records_to_examples([_record_from_sample(s) for s in train])
-    optimizer = dspy.BootstrapFewShot(metric=rubric_metric, max_bootstrapped_demos=max_demos)
+    # MIPROv2 jointly tunes the rubric instructions and the few-shot demos
+    # (Bayesian optimization over instruction candidates), the stronger
+    # optimizer than BootstrapFewShot's demo-only selection.
+    optimizer = dspy.MIPROv2(metric=rubric_metric, max_bootstrapped_demos=max_demos, auto="light")
     optimized_classifier = optimizer.compile(classifier._module, trainset=train_examples)
 
     def accuracy(samples: list[dict[str, Any]], clf: Any) -> dict[str, float]:
