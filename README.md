@@ -3,26 +3,29 @@
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
+ASTRAL is an open framework for evaluating biosecurity risk in AI
+conversations. It generates multi-turn transcripts of malicious and benign
+actors under controlled conditions, and it scans transcripts to produce
+evidence-cited risk assessments.
+
 **The problem?** AI is becoming increasingly capable across dual-use domains
 like cyber and bio/CBRNe, with open models offering frontier capabilities with
 limited safeguards. Measuring what these systems hand to different actors, and
 where safeguards hold or fail, requires conversation data with known
 conditions and labels.
 
-**ASTRAL** is a misuse detection platform with two main parts.
+**Generate.** The data pipeline produces multi-turn transcripts of malicious
+and benign actors at scale, with support for bio-tools and automated red
+teaming. Grounded in [SecureBio's BioTIER](https://securebio.org/biotier/)
+taxonomy and expert-curated misuse variables, it compiles actor cards, runs
+conversations on the [Petri Bloom](https://meridianlabs-ai.github.io/petri_bloom/)
+harness, labels metadata and turns with compliance (permit/refuse) and
+behavior to compute trajectories over many turns, and grades with judges.
+Evaluation conditions for each conversation are set at generation time with
+different combinations of ground truth variables, so model behavior can be
+traced back to known conditions.
 
-**The data pipeline** generates multi-turn transcripts of malicious and benign
-actors at scale, with support for bio-tools and automated red teaming.
-Grounded in [SecureBio's BioTIER](https://securebio.org/biotier/) taxonomy and
-expert-curated misuse variables, it compiles actor cards, runs conversations
-on the [Petri Bloom](https://meridianlabs-ai.github.io/petri_bloom/) harness,
-labels metadata and turns with compliance (permit/refuse) and behavior to
-compute trajectories over many turns, and grades with judges. Evaluation
-conditions for each conversation are set at generation time with different
-combinations of ground truth variables, so model behavior can be traced back
-to known conditions.
-
-**The scanner** (embedding filter + LLM + DSPy), built on
+**Scan.** The scanner (embedding filter + LLM + DSPy), built on
 [Inspect AI](https://inspect.aisi.org.uk/) and
 [Inspect Scout](https://meridianlabs-ai.github.io/inspect_scout/), reads
 transcripts and scores against a rubric, with support for prompt optimization
