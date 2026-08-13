@@ -1,49 +1,67 @@
 # ASTRAL
 
-[![CI](https://github.com/ethan-tam33/astral/actions/workflows/ci.yml/badge.svg?branch=jasontang%2Fprs%2Flab)](https://github.com/ethan-tam33/astral/actions/workflows/ci.yml)
 ![Python 3.12+](https://img.shields.io/badge/python-3.12%2B-blue)
 ![License: MIT](https://img.shields.io/badge/license-MIT-green)
 
-**ASTRAL** compiles grounded, matched actor-card pairs for AI biosecurity
-evaluation and turns them into reproducible transcripts.
+ASTRAL is an open framework for evaluating biosecurity risk in AI
+conversations. It generates multi-turn transcripts of malicious and benign
+actors under controlled conditions, and it scans transcripts to produce
+evidence-cited risk assessments.
 
-The repository is intentionally small. Deterministic defaults come first.
-Heavier runtime arms enter only when they beat that control on a declared
-metric.
+AI assistants now answer questions across dual-use biology, and the agents
+built on them can use bio-tools. Measuring what these systems hand to
+different actors, and where safeguards hold or fail, requires conversation
+data with known conditions and labels. ASTRAL produces that data and the
+machinery to evaluate it.
 
 ## What it does
 
-```text
-pinned ground truth
-→ deterministic card compile
-→ matched benign / malicious pair
-→ runtime transcript
-```
+**Generate.** The pipeline compiles actor cards from grounded routes and
+variables (scientific capability, jailbreak strategy, kill-chain stage,
+intended scope, persistence), runs conversations on the
+[Petri Bloom](https://meridianlabs-ai.github.io/petri_bloom/) harness with
+bio-tool use and automated red teaming, and labels every turn with compliance,
+refusal characterization, and behavior trajectories. Conditions are set at
+generation with ground-truth variables, so behavior differences trace back to
+known conditions.
 
-1. **Compile** a route-grounded actor card from BioTIER assets.
-2. **Match** a benign twin on the same pathway with scope and jailbreak off.
-3. **Run** a deterministic control transcript with per-turn provenance.
-4. **Compare**, when needed, against the thin model arm or the Bloom candidate.
+**Scan.** The scanner, built on [Inspect AI](https://inspect.aisi.org.uk/) and
+[Inspect Scout](https://meridianlabs-ai.github.io/inspect_scout/), reads
+transcripts and scores them against a rubric. It reports what the user appears
+to be pursuing, what capabilities and commitment they show, and how urgently
+the session needs review, with evidence cited from the transcript. The rubric
+supports DSPy prompt optimization so assessments improve as it is tuned on
+more data.
 
-ASTRAL does **not** claim scanner validity, real-world risk, or realism from
-fixture metrics. Those require controlled ablation and independent review.
+Grounding follows [SecureBio's BioTIER](https://securebio.org/biotier/)
+taxonomy of biological risk sets.
 
-## Status
+## The benign dataset
 
-| Piece | Role | Status |
+[`data/dataset/`](data/dataset/) contains 591 verified benign transcripts in
+Inspect `.eval` format (472 train, 119 test), drawn from the ASTRAL 1,000-log
+set. The logs cover Related Biology research conversations and the benign
+twins of higher-risk routes, filtered to zero jailbreak, zero scope, and
+firewall pass. Use it for over-refusal measurement, scanner calibration, and
+as a template for the transcript schema.
+
+## Access tiers
+
+ASTRAL follows BioTIER's tiered-access model.
+
+| Tier | Contents | Access |
 |---|---|---|
-| [`cards/`](src/astral/cards/) | matched actor-card compiler | admitted |
-| [`runtime/`](src/astral/runtime/) deterministic control | CI / ablation floor | admitted |
-| [`runtime/model.py`](src/astral/runtime/model.py) | thin model smoke arm | available |
-| [`bridge/`](src/astral/bridge/) | Petri Bloom adapter | candidate |
-| scanners / full generation stack | archived pre-restart pipeline | not imported |
+| Related Biology | full roleplay grounding | public, this repo |
+| Benign twins | benign control arms of every route | public, this repo |
+| CA/BD framework | route ids, families, allowed variable spaces | public, this repo |
+| CA/BD malicious roleplay | detailed objectives and framing | vetted researchers |
 
-Landmark comparison:
-[`docs/evidence/three-way-ca-immune-escape-01-2026-07-25/`](docs/evidence/three-way-ca-immune-escape-01-2026-07-25/)
+The public package generates benign and Related Biology transcripts end to
+end. Compiling a malicious CA/BD card without the vetted overlay raises
+`GroundingAccessError`. Vetted researchers receive the overlay and set
+`ASTRAL_GROUNDING_OVERLAY` to its path.
 
 ## Install
-
-Python 3.12+.
 
 ```bash
 uv venv
@@ -51,7 +69,7 @@ source .venv/bin/activate
 uv pip install -e '.[dev]'
 ```
 
-Optional Bloom extras:
+Add the Petri Bloom harness for conversation generation:
 
 ```bash
 uv pip install -e '.[bloom]'
@@ -59,119 +77,70 @@ uv pip install -e '.[bloom]'
 
 ## Quick start
 
-```python
-from astral import VariableAssignment, make_actor_cards
-from astral.runtime import run_pair
+Compile a benign actor card:
 
-pair = make_actor_cards(
-    route_id="ca.immune_escape.01",
+```python
+from astral import VariableAssignment, make_actor_card
+
+card = make_actor_card(
+    side="benign",
+    route_id="rb.biochemistry",
     variables=VariableAssignment(
-        scientific_capability=3,
-        jailbreak=1,
-        kill_chain=1,
-        intended_scope=1,
+        scientific_capability=3, jailbreak=0, kill_chain=0, intended_scope=0
     ),
     seed=7,
 )
-
-benign, malicious = run_pair(pair, seed=7)
-print(pair.pair_id)
-print(malicious.jailbreak_method)
-print(benign.turns, malicious.turns)
 ```
 
-What you get:
-
-- **shared path:** same route, agent, workplace, capability, and kill-chain
-- **benign difference:** `intended_scope=0`, `jailbreak=0`, authorized objective
-- **malicious difference:** assigned scope/jailbreak, selected technique, private objective
-- **runtime control:** byte-identical artifacts for the same card and seed
-
-Draw a legal assignment when you do not want to specify variables:
+Run a batch of conversations through the Bloom harness:
 
 ```python
-from astral import draw_assignment, make_actor_cards
+from astral.bridge.batch import run_bloom_batch
 
-route_id, variables = draw_assignment(seed=3, index=0)
-pair = make_actor_cards(route_id=route_id, variables=variables, seed=3)
+report = run_bloom_batch("manifest.yaml", out_dir="_runs/batch")
 ```
 
-Or let the compiler draw for a fixed route:
+Scan eval samples against ground truth:
 
 ```python
-pair = make_actor_cards(route_id="ca.immune_escape.01", seed=7)
+from inspect_ai.log import read_eval_log
+
+from astral.scanner.run import scan_sample
+
+log = read_eval_log("data/dataset/benign-test.eval")
+result = scan_sample(next(iter(log.samples)), model="openrouter/google/gemini-3.5-flash")
 ```
-
-Illegal route values and out-of-constraint agents fail closed.
-
-## Ground truth
-
-Vendored under [`src/astral/assets/grounding/`](src/astral/assets/grounding/),
-loaded byte-complete and hash-pinned:
-
-| Asset | Role |
-|---|---|
-| `biotier_routing.yaml` | 98 routes and per-route allowed variable spaces |
-| `variable_roleplay_guide.yaml` | roleplay instructions by variable level |
-| `biological_agent_list.yaml` | 235 agents with class, tags, T/V, and control-regime tags |
-| `jailbreak_list.yaml` | jailbreak techniques and actor instructions |
-
-The compiler validates caller-provided variables against the route. If variables
-are omitted, it selects from that route’s allowed sets with a deterministic seed,
-then re-validates.
 
 ## Layout
 
 ```text
 src/astral/
-  cards/       deterministic compile, draw, select, grounding
-  runtime/     deterministic control + thin model arm
-  bridge/      Bloom candidate adapter
-  metrics/     complexity and maintainability gates
+  cards/       actor-card compile, draw, select, grounding
+  runtime/     deterministic control and model arm
+  bridge/      Petri Bloom adapter: batch, campaign, normalize, pack, trajectories
+  qa/          judges, acceptance, realization gates
+  scanner/     Inspect Scout stack: rubric, optimize, evidence retrieval
   assets/      pinned ground truth
-docs/
-  design.md        requirements + component registry
-  architecture.md  package layout and dependency rules
-  evidence/        promoted landmark runs only
+data/dataset/  the benign public dataset (.eval)
+docs/          design registry, architecture, evidence
 ```
 
 ## Verify
 
 ```bash
 pytest
-make coverage
-make metrics
 mypy src
-ty check --python .venv/bin/python src   # advisory
 python skills/astral/scripts/check_submission.py --full
 ```
 
-Enforcement stack:
+CI enforces ruff, mypy, pytest, coverage, complexity metrics, and the design
+registry in [`docs/design.md`](docs/design.md).
 
-- **blocking:** ruff, mypy, pytest, coverage floor 90%, radon metrics, design registry
-- **advisory:** ty second-opinion types
-- **config:** [`pyproject.toml`](pyproject.toml), [`skills/astral/gates.yaml`](skills/astral/gates.yaml), CI
+## Contributing and citation
 
-## Documentation
-
-| Doc | Use |
-|---|---|
-| [`docs/design.md`](docs/design.md) | requirements and per-file registry |
-| [`docs/architecture.md`](docs/architecture.md) | layout and dependencies |
-| [`docs/evidence/`](docs/evidence/) | landmark evidence index |
-| [`AGENTS.md`](AGENTS.md) | agent operating contract |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | development and review standard |
-| [`docs/progress/README.md`](docs/progress/README.md) | local notes after material pushes only |
-
-## Design rules
-
-- Keep the core minimal and explicit.
-- Deterministic control first; change one variable at a time.
-- Candidates are not defaults until they earn admission.
-- Fixture metrics measure workflow mechanics, not external validity.
-- Archived code is never imported. Port constructs against current contracts.
-
-Pre-restart pipeline tag: `archive/0.6.0-full-pipeline`.
+Development standards live in [`CONTRIBUTING.md`](CONTRIBUTING.md) and the
+agent contract in [`AGENTS.md`](AGENTS.md). If you use ASTRAL in research,
+cite [`CITATION.cff`](CITATION.cff).
 
 ## License
 
