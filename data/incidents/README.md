@@ -1,22 +1,26 @@
-# ASTRAL Incident Registry
+# ASTRAL Incident Registry + Transcripts
 
-Curated, labeled records of documented autonomous-agent incidents, grounded in
-public evidence. Each incident is one registry entry with provenance-linked
-phases, so the records can ground the cyber pipeline's compiler, evaluate
-detection methods, and seed transcript generation.
+Real-world agentic incidents as labeled, Inspect-native data — the real-world
+counterpart to ASTRAL's synthetic transcripts. Usable to train and evaluate
+detection models against documented ground truth.
 
-## Sources (all public)
+## Files
 
-| Incident | Source | Evidence level |
-|---|---|---|
-| OpenAI/HF breach (Jul 9-13, 2026) | HF forensic timeline + OpenAI disclosure | full: 17,600 actions, 6,280 clusters, verbatim commands |
-| Anthropic's 3 incidents (Apr-Jul 2026) | Anthropic's review (141,006 runs) | summary: per-incident accounts |
-| AISI near-miss | AISI cheating-behaviour study (475 runs x 5 models) | summary + stats |
-| OpenAI sandbox-escape PR incident (Jul 20) | OpenAI long-horizon post | summary |
-| METR-documented incidents | METR Frontier Risk Report | aggregate |
+| File | What it is |
+|---|---|
+| `incident_registry.yaml` | the curated incident registry: id, lab, category, ATT&CK-mapped phases, detection, provenance sources |
+| `incident-transcripts.eval` | the incidents as Inspect-format transcripts with per-turn phase labels (authorized_eval → recon → initial_access → ... → exfiltration → evasion), reconstructible and checkable against the public forensic record |
 
-## Schema
+## Ground truth
 
-Each incident: id, date range, lab, model(s), category (intrusion / eval-cheating
-/ sandbox-escape), phases (ATT&CK-mapped), detection (how caught, at what
-stage), sources (linked receipts).
+Every turn label is drawn from the published forensic record (the Hugging Face
+technical timeline, OpenAI's disclosure, Anthropic's review, AISI's study). The
+HF breach turn structure reconstructs the documented two-stage campaign:
+sandbox escape and launchpad, then the intrusion phases through cluster-admin
+lateral movement to exfiltration and evasion.
+
+## Use
+
+Train and evaluate detection models on "flag the breach from the actions so
+far" — the per-turn phase labels give the ground truth for where detection
+should fire. Scan with the ASTRAL scanner or any Inspect-compatible tooling.
