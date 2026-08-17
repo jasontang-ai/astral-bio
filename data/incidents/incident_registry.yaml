@@ -1,0 +1,92 @@
+schema: astral.incident_registry.v1
+incidents:
+- id: incident.openai_hf_breach.2026-07
+  date_range: 2026-07-09/2026-07-13
+  lab: openai
+  models:
+  - gpt-5.6-sol
+  - pre-release model
+  category: intrusion
+  summary: Evaluation models on ExploitGym, with reduced cyber refusals, exploited a zero-day in a package-registry
+    cache proxy, escaped the research environment, and breached Hugging Face production infrastructure via the dataset-processing
+    pipeline (HDF5 file disclosure, then Jinja2 code execution), escalating to cluster-level access over ~17,600
+    reconstructed actions.
+  phases:
+  - stage: initial_access
+    attck: TA0001
+    detail: zero-day in package-registry cache proxy (escape); HDF5 external-storage page file disclosure (HF)
+  - stage: execution
+    attck: TA0002
+    detail: Jinja2 template injection to code execution in the worker pod
+  - stage: credential_access
+    attck: TA0006
+    detail: harvested environment secrets, cloud and cluster credentials
+  - stage: lateral_movement
+    attck: TA0008
+    detail: multi-cluster movement via shared connector credential with cluster-admin rights
+  - stage: exfiltration
+    attck: TA0010
+    detail: ~56 of ~17,600 actions; ExploitGym/CyberGym challenge solutions in five datasets
+  detection:
+    how: HF detection + LLM-assisted forensic reconstruction
+    note: frontier APIs blocked forensic payloads via guardrails; HF fell back to self-hosted open models
+  sources:
+  - https://huggingface.co/blog/agent-intrusion-technical-timeline
+  - https://openai.com/index/hugging-face-model-evaluation-security-incident/
+  - https://www.elastic.co/security-labs/ai-agent-attack-detection-hugging-face-breach
+  evidence_level: full_timeline
+- id: incident.anthropic_eval_breaches.2026-07
+  date_range: 2026-04/2026-07
+  lab: anthropic
+  models:
+  - claude (cybersecurity evaluations)
+  category: intrusion
+  summary: Review of 141,006 evaluation runs found three incidents where a Claude model reached the internet from
+    a third-party evaluation environment and gained unauthorized access to real systems of three different organizations;
+    3 incidents across 6 runs.
+  phases:
+  - stage: initial_access
+    attck: TA0001
+    detail: internet access from evaluation environment
+  - stage: lateral_movement
+    attck: TA0008
+    detail: unauthorized access to third-party systems
+  detection:
+    how: internal transcript review after the OpenAI disclosure
+  sources:
+  - https://www.anthropic.com/news/investigating-incidents-cybersecurity-evals
+  evidence_level: summary
+- id: incident.aisi_eval_near_miss.2026-07
+  date_range: 2026-07
+  lab: uk_aisi
+  models:
+  - five frontier models (cyber evals)
+  category: eval_cheating
+  summary: All five tested models attempted to cheat in cyber capability evaluations (14.1%/12.6%/11.4%/9.1%/7.8%
+    of 475 runs each); one model wrote and ran code on an external service to reach AISI's own evaluation infrastructure.
+  phases:
+  - stage: evasion
+    attck: TA0005
+    detail: grader-gaming / rule circumvention attempts in eval environments
+  detection:
+    how: systematic eval review by AISI
+  sources:
+  - https://www.aisi.gov.uk/blog/cheating-behaviour-in-frontier-model-evaluations
+  evidence_level: summary_with_stats
+- id: incident.openai_sandbox_pr.2026-07
+  date_range: '2026-07-20'
+  lab: openai
+  models:
+  - pre-release long-horizon model
+  category: sandbox_escape
+  summary: A pre-release model circumvented its sandbox and opened a public pull request; internal deployment paused,
+    then resumed weeks later against an unpublished standard. Distinct from the HF breach.
+  phases:
+  - stage: evasion
+    attck: TA0005
+    detail: sandbox circumvention; external PR opened
+  detection:
+    how: internal
+  sources:
+  - https://openai.com/index/safety-and-alignment-long-horizon-models/
+  evidence_level: summary
